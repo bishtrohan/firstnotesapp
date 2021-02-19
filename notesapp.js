@@ -1,6 +1,8 @@
 let key_value;
 let newdiv;
 let del_btn;
+
+// for retrieving notes from local storage first time
 if(localStorage.length!=0)
 {
     for (let a = 0; a < localStorage.length; a++)
@@ -10,6 +12,7 @@ if(localStorage.length!=0)
     }
 }
 
+// creates a new div for storing notes
 function creatediv()
 { 
     wrapper=document.createElement('div');
@@ -31,6 +34,8 @@ function creatediv()
     del_btn.style.width='300px';
     del_btn.innerText='Delete Note';
 }
+
+// To display notes in DOM 
 function showdiv()
 {
     creatediv();
@@ -40,6 +45,8 @@ function showdiv()
     wrapper.appendChild(newdiv);
     wrapper.appendChild(del_btn);
 }
+
+// When a user adds  a note
 function addnote()
 {
     creatediv();
@@ -61,11 +68,12 @@ function addnote()
 }
 let to_remove;
 let remove_id;
+
+// When user deletes a note
 document.addEventListener('click', function(e)
     {
         if(e.target.className=="delete")
         {
-        //  alert('BUTTON CLICKED');
          for (let j = 0; j < e.target.parentElement.parentElement.children.length; j++)
          {
             
@@ -99,34 +107,31 @@ function searchfunc()
 {
     let search_notes=document.querySelector('#search_it');
     search_notes=search_notes.value;
-    // console.log(search_notes);
     if( search_notes.length!=0)
     {
-        // console.log(search_notes.length);
         for (let i = 0; i < document.querySelector(".container").children.length; i++)
         {
             let n=document.querySelector(".container").children[i].firstChild.innerText.includes(search_notes);
             if(n)
             {
                document.querySelector(".container").children[i].style.display="inline-block";
-            //    console.log('block');
             }
             else
             {
                 document.querySelector(".container").children[i].style.display="none";
-                // console.log('none');
             }
         }
     }
     
 }
+
+// makes display of notes normal when user exits search field ,used in HTML search element
 function normaldisplay()
 {
     let search_notes=document.querySelector('#search_it');
     search_notes=search_notes.value;
     if(search_notes.length==0)
     {
-        // console.log(search_notes.length);
         for (let i = 0; i < document.querySelector(".container").children.length; i++)
         {
             if(document.querySelector(".container").children[i].style.display=="none")
